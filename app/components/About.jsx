@@ -2,7 +2,7 @@ import { assets, infoList, toolsData } from '@/assets/assets'
 import Image from 'next/image'
 import React from 'react'
 
-const About = () => {
+const About = (isDark, setIsDark) => {
   return (
     <div className='w-full px-[12%] py-10 scroll-mt-20' id='about'>
         <h4 className='text-center mb-2 text-lg font-ovo'>Introduction</h4>
