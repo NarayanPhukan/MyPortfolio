@@ -43,7 +43,6 @@ export default function Header() {
   return (
     <section className="relative w-11/12 max-w-4xl mx-auto min-h-screen flex flex-col items-center justify-center text-center px-4">
 
-      {/* Main Animated Container */}
       <motion.div
         variants={container}
         initial="hidden"
@@ -65,8 +64,6 @@ export default function Header() {
             priority
             className="rounded-full mx-auto shadow-xl dark:shadow-white/10"
           />
-
-          {/* Subtle Glow */}
           <div className="absolute inset-0 rounded-full blur-2xl opacity-20 bg-purple-500 dark:opacity-30 -z-10"></div>
         </motion.div>
 
@@ -75,7 +72,7 @@ export default function Header() {
           variants={fadeUp}
           className="flex items-end justify-center gap-2 text-lg sm:text-2xl font-ovo mt-6"
         >
-          Hi, I'm Narayan Phukan
+          Hi, I&apos;m Narayan Phukan
           <Image src={assets.hand_icon} alt="" width={22} height={22} />
         </motion.h3>
 
@@ -84,7 +81,7 @@ export default function Header() {
           variants={fadeUp}
           className="mt-4 text-3xl sm:text-5xl lg:text-6xl font-ovo leading-tight"
         >
-          MERN Stack Developer <br className="hidden sm:block" />
+          Full-Stack MERN Developer <br className="hidden sm:block" />
           Based in India
         </motion.h1>
 
@@ -93,9 +90,9 @@ export default function Header() {
           variants={fadeUp}
           className="max-w-2xl mx-auto mt-6 text-gray-700 dark:text-white/80 leading-relaxed"
         >
-          I design and develop scalable, production-ready full-stack applications
-          using the MERN stack — combining intuitive React frontends with robust
-          Node.js backends.
+          I build scalable, production-ready web apps with the MERN stack —
+          clean React frontends, robust Node.js APIs, and MongoDB-powered backends.
+          Open to full-time roles and freelance projects.
         </motion.p>
 
         {/* Buttons */}
@@ -113,9 +110,13 @@ export default function Header() {
             <Image src={assets.right_arrow_white} alt="" width={16} height={16} />
           </motion.a>
 
+          {/* 
+            FIX: Replace '/sample' with your actual resume PDF path.
+            Place your resume at /public/resume.pdf and update href below.
+          */}
           <motion.a
-            href="/sample"
-            download
+            href="/resume.pdf"
+            download="Narayan_Phukan_Resume.pdf"
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 rounded-full border border-gray-400 flex items-center gap-2 dark:border-white dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition"

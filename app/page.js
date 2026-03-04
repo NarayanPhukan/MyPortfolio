@@ -13,10 +13,9 @@ export default function Home() {
 
   const [isDark, setIsDark] = useState(false)
 
-  // Initialize theme once
+  // Initialize theme from localStorage or system preference
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme")
-
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 
     if (savedTheme === "dark" || (!savedTheme && systemDark)) {
@@ -27,7 +26,7 @@ export default function Home() {
     }
   }, [])
 
-  // Update theme on toggle
+  // Sync theme changes to DOM + localStorage
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark")
@@ -40,13 +39,13 @@ export default function Home() {
 
   return (
     <>
-      <Navbar isDark={isDark} setIsDark={setIsDark}/>
+      <Navbar isDark={isDark} setIsDark={setIsDark} />
       <Header />
-      <About />
+      <About isDark={isDark} />  {/* FIX: isDark was missing — icons were always showing light version */}
       <Services />
-      <Work />
-      <Contact />
-      <Footer />
+      <Work isDark={isDark} />
+      <Contact isDark={isDark} />
+      <Footer isDark={isDark} />
     </>
   );
 }

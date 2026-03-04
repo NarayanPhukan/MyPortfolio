@@ -1,17 +1,47 @@
 "use client"
 
-import { assets, serviceData } from "@/assets/assets"
+import { assets } from "@/assets/assets"
 import Image from "next/image"
 import { motion } from "framer-motion"
+
+// ─── Replace serviceData import with inline data tailored to MERN stack ──────
+// If you still want to drive this from assets.js, update serviceData there.
+const services = [
+  {
+    icon: assets.web_icon,
+    title: "Full-Stack Web Apps",
+    description:
+      "End-to-end MERN applications — from pixel-perfect React UIs to scalable Node.js + Express REST APIs backed by MongoDB.",
+    link: "#work",
+  },
+  {
+    icon: assets.mobile_icon,
+    title: "REST API Development",
+    description:
+      "Designing and building secure, well-documented REST APIs with Express.js, JWT authentication, and MongoDB.",
+    link: "#work",
+  },
+  {
+    icon: assets.ui_icon,
+    title: "Frontend Development",
+    description:
+      "Responsive, accessible React & Next.js interfaces with smooth animations, clean component architecture, and great UX.",
+    link: "#work",
+  },
+  {
+    icon: assets.graphics_icon,
+    title: "Database Design",
+    description:
+      "Efficient MongoDB schema design, indexing strategies, and integration with Mongoose for production-ready data layers.",
+    link: "#work",
+  },
+]
 
 const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.18,
-      delayChildren: 0.2
-    }
+    transition: { staggerChildren: 0.18, delayChildren: 0.2 }
   }
 }
 
@@ -20,14 +50,11 @@ const fadeUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1] // premium cubic bezier
-    }
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   }
 }
 
-export default function Services({ isDark }) {
+export default function Services() {
   return (
     <section
       id="services"
@@ -60,8 +87,8 @@ export default function Services({ isDark }) {
           variants={fadeUp}
           className="max-w-2xl mx-auto mt-6 mb-16 text-gray-700 dark:text-white/80 leading-relaxed"
         >
-          I build modern, scalable web applications using the MERN stack —
-          from intuitive frontends to secure backends.
+          I specialise in the full MERN stack — from interactive frontends to
+          secure, scalable server-side systems and database architecture.
         </motion.p>
       </motion.div>
 
@@ -73,7 +100,7 @@ export default function Services({ isDark }) {
         viewport={{ once: true, amount: 0.15 }}
         className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-10"
       >
-        {serviceData.map(({ icon, title, description, link }, index) => (
+        {services.map(({ icon, title, description, link }, index) => (
           <motion.div
             key={index}
             variants={fadeUp}
@@ -87,8 +114,6 @@ export default function Services({ isDark }) {
                        hover:bg-lightHover
                        dark:hover:bg-darkHover/40"
           >
-
-            {/* Icon */}
             <div className="mb-6">
               <Image
                 src={icon}
@@ -99,22 +124,19 @@ export default function Services({ isDark }) {
               />
             </div>
 
-            {/* Title */}
             <h3 className="text-lg mb-4 font-semibold text-gray-800 dark:text-white">
               {title}
             </h3>
 
-            {/* Description */}
             <p className="text-sm leading-6 text-gray-600 dark:text-white/80">
               {description}
             </p>
 
-            {/* Link */}
             <a
               href={link}
               className="flex items-center gap-2 text-sm mt-8 font-medium group-hover:gap-3 transition-all duration-300"
             >
-              Read more
+              See projects
               <Image
                 src={assets.right_arrow}
                 alt=""
@@ -124,9 +146,7 @@ export default function Services({ isDark }) {
               />
             </a>
 
-            {/* subtle glow effect */}
             <div className="absolute inset-0 rounded-3xl bg-purple-500 blur-3xl opacity-0 group-hover:opacity-10 transition duration-500 -z-10"></div>
-
           </motion.div>
         ))}
       </motion.div>

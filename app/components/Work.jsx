@@ -8,10 +8,7 @@ const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.2
-    }
+    transition: { staggerChildren: 0.2, delayChildren: 0.2 }
   }
 }
 
@@ -20,10 +17,7 @@ const fadeUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1]
-    }
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   }
 }
 
@@ -60,8 +54,8 @@ export default function Work({ isDark }) {
           variants={fadeUp}
           className="max-w-2xl mx-auto mt-6 mb-16 text-gray-700 dark:text-white/80 leading-relaxed"
         >
-          Explore a collection of projects showcasing my expertise in modern
-          full-stack MERN development.
+          A selection of full-stack MERN projects — each built with real-world
+          requirements, clean architecture, and production-quality code.
         </motion.p>
       </motion.div>
 
@@ -80,8 +74,6 @@ export default function Work({ isDark }) {
             whileHover={{ y: -10 }}
             className="relative rounded-3xl overflow-hidden group cursor-pointer"
           >
-
-            {/* Project Image */}
             <Image
               src={project.bgImage}
               alt={project.title}
@@ -90,17 +82,16 @@ export default function Work({ isDark }) {
               className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
             />
 
-            {/* Dark Overlay */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
-            {/* Content Card */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%]
-                            bg-white dark:bg-darkTheme
-                            rounded-2xl px-5 py-4
-                            flex items-center justify-between
-                            shadow-xl
-                            transition-all duration-500
-                            group-hover:bottom-8"
+            <div
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%]
+                          bg-white dark:bg-darkTheme
+                          rounded-2xl px-5 py-4
+                          flex items-center justify-between
+                          shadow-xl
+                          transition-all duration-500
+                          group-hover:bottom-8"
             >
               <div>
                 <h3 className="font-semibold text-gray-800 dark:text-white">
@@ -111,13 +102,22 @@ export default function Work({ isDark }) {
                 </p>
               </div>
 
-              <div className="flex items-center justify-center
-                              w-10 h-10
-                              border border-black dark:border-white
-                              rounded-full
-                              transition-all duration-300
-                              group-hover:bg-black
-                              dark:group-hover:bg-white"
+              {/* 
+                FIX: Link each project card to its live URL or GitHub repo.
+                Add a `link` field to each item in workData (in assets.js)
+                and replace href="#" below with href={project.link}.
+              */}
+              <a
+                href={project.link || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center
+                            w-10 h-10
+                            border border-black dark:border-white
+                            rounded-full
+                            transition-all duration-300
+                            group-hover:bg-black
+                            dark:group-hover:bg-white"
               >
                 <Image
                   src={assets.send_icon}
@@ -126,14 +126,14 @@ export default function Work({ isDark }) {
                   height={18}
                   className="group-hover:invert dark:group-hover:invert-0"
                 />
-              </div>
+              </a>
             </div>
 
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Show More Button */}
+      {/* View All on GitHub */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -142,7 +142,9 @@ export default function Work({ isDark }) {
         className="flex justify-center mt-20"
       >
         <a
-          href="#"
+          href="https://github.com/NarayanPhukan"
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center gap-2
                      border border-gray-700 dark:border-white
                      text-gray-700 dark:text-white
@@ -151,7 +153,7 @@ export default function Work({ isDark }) {
                      dark:hover:bg-darkHover
                      transition duration-500"
         >
-          Show more
+          View all on GitHub
           <Image
             src={isDark ? assets.right_arrow_bold_dark : assets.right_arrow_bold}
             alt=""
