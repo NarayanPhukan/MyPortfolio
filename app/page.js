@@ -42,7 +42,7 @@ export default function Home() {
       <Navbar isDark={isDark} setIsDark={setIsDark} />
       <Header />
       <About isDark={isDark} />  {/* FIX: isDark was missing — icons were always showing light version */}
-      <Services />
+      <Services isDark={isDark} />
       <Work isDark={isDark} />
       <Contact isDark={isDark} />
       <Footer isDark={isDark} />

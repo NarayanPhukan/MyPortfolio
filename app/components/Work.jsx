@@ -25,7 +25,7 @@ export default function Work({ isDark }) {
   return (
     <section
       id="work"
-      className="w-full px-[12%] py-28 scroll-mt-24"
+      className="w-full px-[12%] py-16 scroll-mt-20"
     >
 
       {/* Heading */}
@@ -38,7 +38,7 @@ export default function Work({ isDark }) {
       >
         <motion.h4
           variants={fadeUp}
-          className="mb-3 text-lg font-ovo text-gray-600 dark:text-white/70"
+          className="mb-3 text-lg font-ovo text-accent tracking-wide"
         >
           My Portfolio
         </motion.h4>
@@ -52,7 +52,7 @@ export default function Work({ isDark }) {
 
         <motion.p
           variants={fadeUp}
-          className="max-w-2xl mx-auto mt-6 mb-16 text-gray-700 dark:text-white/80 leading-relaxed"
+          className="max-w-2xl mx-auto mt-6 mb-16 text-gray-600 dark:text-white/70 leading-relaxed"
         >
           A selection of full-stack MERN projects — each built with real-world
           requirements, clean architecture, and production-quality code.
@@ -65,66 +65,52 @@ export default function Work({ isDark }) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
-        className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-10"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
       >
         {workData.map((project, index) => (
           <motion.div
             key={index}
             variants={fadeUp}
-            whileHover={{ y: -10 }}
-            className="relative rounded-3xl overflow-hidden group cursor-pointer"
+            whileHover={{ y: -8 }}
+            className="relative rounded-3xl overflow-hidden group cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-none border border-transparent hover:border-accent/20 dark:hover:border-accent/30 transition-all duration-500"
           >
-            <Image
-              src={project.bgImage}
-              alt={project.title}
-              width={600}
-              height={600}
-              className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
-            />
+            <div className="aspect-4/5 overflow-hidden">
+              <Image
+                src={project.bgImage}
+                alt={project.title}
+                width={600}
+                height={750}
+                className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+              />
+            </div>
 
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
 
             <div
-              className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%]
-                          bg-white dark:bg-darkTheme
-                          rounded-2xl px-5 py-4
-                          flex items-center justify-between
-                          shadow-xl
-                          transition-all duration-500
-                          group-hover:bottom-8"
+              className="absolute bottom-5 left-1/2 -translate-x-1/2 w-[88%] bg-white/90 backdrop-blur-md dark:bg-darkTheme/90 rounded-xl px-4 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-500 group-hover:bottom-6"
             >
-              <div>
-                <h3 className="font-semibold text-gray-800 dark:text-white">
+              <div className="min-w-0">
+                <h3 className="font-semibold text-sm text-gray-800 dark:text-white truncate">
                   {project.title}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-white/70">
+                <p className="text-xs text-gray-500 dark:text-white/60 mt-0.5">
                   {project.description}
                 </p>
               </div>
 
-              {/* 
-                FIX: Link each project card to its live URL or GitHub repo.
-                Add a `link` field to each item in workData (in assets.js)
-                and replace href="#" below with href={project.link}.
-              */}
               <a
                 href={project.link || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center
-                            w-10 h-10
-                            border border-black dark:border-white
-                            rounded-full
-                            transition-all duration-300
-                            group-hover:bg-black
-                            dark:group-hover:bg-white"
+                target={project.link ? "_blank" : undefined}
+                rel={project.link ? "noopener noreferrer" : undefined}
+                className="shrink-0 flex items-center justify-center w-9 h-9 ml-3 border border-gray-300 dark:border-white/30 rounded-full transition-all duration-300 hover:bg-accent hover:border-accent hover:shadow-[0_4px_12px_rgba(99,102,241,0.3)]"
               >
                 <Image
                   src={assets.send_icon}
                   alt="View Project"
-                  width={18}
-                  height={18}
-                  className="group-hover:invert dark:group-hover:invert-0"
+                  width={14}
+                  height={14}
+                  className="w-auto h-auto hover:invert dark:invert dark:hover:invert-0"
                 />
               </a>
             </div>
@@ -145,13 +131,7 @@ export default function Work({ isDark }) {
           href="https://github.com/NarayanPhukan"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2
-                     border border-gray-700 dark:border-white
-                     text-gray-700 dark:text-white
-                     rounded-full py-3 px-10
-                     hover:bg-lightHover
-                     dark:hover:bg-darkHover
-                     transition duration-500"
+          className="group flex items-center gap-2 border border-gray-300 dark:border-white/30 text-gray-700 dark:text-white rounded-full py-3 px-10 hover:bg-accent hover:text-white hover:border-accent hover:shadow-[0_4px_20px_rgba(99,102,241,0.25)] dark:hover:border-accent transition-all duration-500"
         >
           View all on GitHub
           <Image
@@ -159,6 +139,7 @@ export default function Work({ isDark }) {
             alt=""
             width={16}
             height={16}
+            className="w-auto h-auto transition-transform duration-300 group-hover:translate-x-1 group-hover:invert"
           />
         </a>
       </motion.div>

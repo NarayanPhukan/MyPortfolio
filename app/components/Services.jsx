@@ -4,8 +4,6 @@ import { assets } from "@/assets/assets"
 import Image from "next/image"
 import { motion } from "framer-motion"
 
-// ─── Replace serviceData import with inline data tailored to MERN stack ──────
-// If you still want to drive this from assets.js, update serviceData there.
 const services = [
   {
     icon: assets.web_icon,
@@ -54,11 +52,11 @@ const fadeUp = {
   }
 }
 
-export default function Services() {
+export default function Services({ isDark }) {
   return (
     <section
       id="services"
-      className="relative w-full px-[12%] py-28 scroll-mt-24"
+      className="relative w-full px-[12%] py-16 scroll-mt-20"
     >
 
       {/* Heading */}
@@ -71,7 +69,7 @@ export default function Services() {
       >
         <motion.h4
           variants={fadeUp}
-          className="mb-3 text-lg font-ovo text-gray-600 dark:text-white/70"
+          className="mb-3 text-lg font-ovo text-accent tracking-wide"
         >
           What I Offer
         </motion.h4>
@@ -85,7 +83,7 @@ export default function Services() {
 
         <motion.p
           variants={fadeUp}
-          className="max-w-2xl mx-auto mt-6 mb-16 text-gray-700 dark:text-white/80 leading-relaxed"
+          className="max-w-2xl mx-auto mt-6 mb-16 text-gray-600 dark:text-white/70 leading-relaxed"
         >
           I specialise in the full MERN stack — from interactive frontends to
           secure, scalable server-side systems and database architecture.
@@ -98,55 +96,50 @@ export default function Services() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
-        className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-10"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
       >
         {services.map(({ icon, title, description, link }, index) => (
           <motion.div
             key={index}
             variants={fadeUp}
-            whileHover={{ y: -10 }}
-            className="group relative border border-gray-300 dark:border-white/30
-                       rounded-3xl px-8 py-12
-                       cursor-pointer
-                       transition-all duration-500
-                       hover:shadow-2xl
-                       dark:hover:shadow-white/20
-                       hover:bg-lightHover
-                       dark:hover:bg-darkHover/40"
+            whileHover={{ y: -8 }}
+            className="group relative border border-gray-200 dark:border-white/15 rounded-3xl px-7 py-10 cursor-pointer transition-all duration-500 hover:shadow-[0_12px_40px_rgba(99,102,241,0.1)] hover:border-accent/30 dark:hover:border-accent/40 bg-white dark:bg-darkSurface/50 hover:bg-white dark:hover:bg-darkHover/40"
           >
-            <div className="mb-6">
+            {/* Icon with accent bg */}
+            <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-linear-to-br from-accent/10 to-purple-500/10 dark:from-accent/15 dark:to-purple-500/15 group-hover:from-accent/20 group-hover:to-purple-500/20 transition-all duration-500 mb-6">
               <Image
                 src={icon}
                 alt={title}
-                width={40}
-                height={40}
-                className="transition-transform duration-500 group-hover:scale-110"
+                width={26}
+                height={26}
+                className="w-auto h-auto transition-transform duration-500 group-hover:scale-110"
               />
             </div>
 
-            <h3 className="text-lg mb-4 font-semibold text-gray-800 dark:text-white">
+            <h3 className="text-lg mb-3 font-semibold text-gray-800 dark:text-white">
               {title}
             </h3>
 
-            <p className="text-sm leading-6 text-gray-600 dark:text-white/80">
+            <p className="text-sm leading-6 text-gray-500 dark:text-white/60">
               {description}
             </p>
 
             <a
               href={link}
-              className="flex items-center gap-2 text-sm mt-8 font-medium group-hover:gap-3 transition-all duration-300"
+              className="inline-flex items-center gap-2 text-sm mt-6 font-medium text-accent group-hover:gap-3 transition-all duration-300"
             >
               See projects
               <Image
-                src={assets.right_arrow}
+                src={isDark ? assets.right_arrow_dark : assets.right_arrow}
                 alt=""
-                width={16}
-                height={16}
-                className="transition-transform duration-300 group-hover:translate-x-1"
+                width={14}
+                height={14}
+                className="w-auto h-auto transition-transform duration-300 group-hover:translate-x-1"
               />
             </a>
 
-            <div className="absolute inset-0 rounded-3xl bg-purple-500 blur-3xl opacity-0 group-hover:opacity-10 transition duration-500 -z-10"></div>
+            {/* Subtle hover glow */}
+            <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-accent/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition duration-500 -z-10 blur-xl" />
           </motion.div>
         ))}
       </motion.div>

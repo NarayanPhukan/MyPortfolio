@@ -31,7 +31,7 @@ export default function About({ isDark }) {
   return (
     <section
       id="about"
-      className="relative w-full px-[12%] py-28 scroll-mt-24"
+      className="relative w-full px-[12%] py-16 scroll-mt-20"
     >
 
       {/* Section Heading */}
@@ -44,7 +44,7 @@ export default function About({ isDark }) {
       >
         <motion.h4
           variants={fadeUp}
-          className="text-lg font-ovo mb-3 text-gray-600 dark:text-white/70"
+          className="text-lg font-ovo mb-3 text-accent tracking-wide"
         >
           Introduction
         </motion.h4>
@@ -58,7 +58,7 @@ export default function About({ isDark }) {
       </motion.div>
 
       {/* Content */}
-      <div className="flex flex-col lg:flex-row items-center gap-20 mt-24">
+      <div className="flex flex-col lg:flex-row items-center gap-20 mt-12">
 
         {/* Image */}
         <motion.div
@@ -73,11 +73,14 @@ export default function About({ isDark }) {
             alt="Narayan Phukan"
             width={320}
             height={380}
-            className="rounded-3xl transition duration-500 hover:scale-105"
+            className="w-auto h-auto rounded-3xl transition duration-700 hover:scale-105"
           />
 
+          {/* Subtle border glow */}
+          <div className="absolute inset-0 rounded-3xl ring-1 ring-black/5 dark:ring-white/10" />
+
           {/* subtle glow */}
-          <div className="absolute inset-0 rounded-3xl bg-purple-500 blur-3xl opacity-10 -z-10"></div>
+          <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-accent/20 to-purple-500/20 blur-3xl opacity-0 hover:opacity-100 transition duration-700 -z-10" />
         </motion.div>
 
         {/* Right Side */}
@@ -89,7 +92,7 @@ export default function About({ isDark }) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mb-12 max-w-2xl text-gray-700 dark:text-white/80 leading-relaxed"
+            className="mb-12 max-w-2xl text-gray-600 dark:text-white/70 leading-relaxed"
           >
             I design and develop scalable full-stack web applications using the MERN stack.
             From intuitive React frontends to robust Node.js backends, I build
@@ -102,33 +105,29 @@ export default function About({ isDark }) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl"
           >
             {infoList.map(({ icon, iconDark, title, description }, index) => (
               <motion.li
                 key={index}
                 variants={fadeUp}
-                whileHover={{ y: -8 }}
-                className="border border-gray-300 dark:border-white/30 
-                           rounded-2xl p-6 cursor-pointer
-                           transition-all duration-500
-                           hover:shadow-2xl
-                           dark:hover:shadow-white/20
-                           hover:bg-lightHover 
-                           dark:hover:bg-darkHover/40"
+                whileHover={{ y: -6 }}
+                className="group border border-gray-200 dark:border-white/15 rounded-2xl p-6 cursor-pointer transition-all duration-500 hover:shadow-[0_8px_30px_rgba(99,102,241,0.1)] hover:border-accent/30 dark:hover:border-accent/40 hover:bg-white dark:hover:bg-darkHover/60"
               >
-                <Image
-                  src={isDark ? iconDark : icon}
-                  alt={title}
-                  width={28}
-                  height={28}
-                />
+                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-accent/5 dark:bg-accent/10 mb-4 group-hover:bg-accent/10 dark:group-hover:bg-accent/20 transition-colors duration-300">
+                  <Image
+                    src={isDark ? iconDark : icon}
+                    alt={title}
+                    width={22}
+                    height={22}
+                  className="w-auto h-auto" />
+                </div>
 
-                <h3 className="my-4 font-semibold text-gray-800 dark:text-white">
+                <h3 className="mb-2 font-semibold text-gray-800 dark:text-white">
                   {title}
                 </h3>
 
-                <p className="text-sm text-gray-600 dark:text-white/70 leading-6">
+                <p className="text-sm text-gray-500 dark:text-white/60 leading-6">
                   {description}
                 </p>
               </motion.li>
@@ -141,7 +140,7 @@ export default function About({ isDark }) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mt-14 mb-6 font-ovo text-gray-700 dark:text-white/80"
+            className="mt-14 mb-6 font-ovo text-gray-600 dark:text-white/70"
           >
             Tools I Use
           </motion.h4>
@@ -151,27 +150,21 @@ export default function About({ isDark }) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex items-center gap-6 flex-wrap"
+            className="flex items-center gap-5 flex-wrap"
           >
             {toolsData.map((tool, index) => (
               <motion.li
                 key={index}
                 variants={fadeUp}
-                whileHover={{ scale: 1.15, rotate: 6 }}
-                className="flex items-center justify-center 
-                           w-14 aspect-square 
-                           border border-gray-300 dark:border-white/30 
-                           rounded-full cursor-pointer
-                           transition-all duration-500
-                           hover:shadow-xl
-                           dark:hover:shadow-white/20"
+                whileHover={{ scale: 1.15, y: -4 }}
+                className="flex items-center justify-center w-14 aspect-square border border-gray-200 dark:border-white/15 rounded-2xl cursor-pointer transition-all duration-500 bg-white dark:bg-darkHover/40 hover:shadow-[0_6px_20px_rgba(99,102,241,0.12)] hover:border-accent/30 dark:hover:border-accent/40"
               >
                 <Image
                   src={tool}
                   alt="Tool"
                   width={24}
                   height={24}
-                />
+                className="w-auto h-auto" />
               </motion.li>
             ))}
           </motion.ul>

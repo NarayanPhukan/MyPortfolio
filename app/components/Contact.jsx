@@ -3,6 +3,16 @@
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+  }
+};
 
 const Contact = ({ isDark }) => {
   const [result, setResult] = useState("");
@@ -40,29 +50,46 @@ const Contact = ({ isDark }) => {
   return (
     <section
       id="contact"
-      className="w-full px-[12%] py-16 scroll-mt-24 bg-[url('/footer-bg-color.png')] bg-no-repeat bg-center bg-[length:90%_auto] dark:bg-none transition-all duration-500"
+      className="w-full px-[12%] py-16 scroll-mt-20 bg-[url('/footer-bg-color.png')] bg-no-repeat bg-center bg-size-[90%_auto] dark:bg-none transition-all duration-500"
     >
-      <h4 className="text-center mb-2 text-lg font-ovo tracking-wide">
-        Connect with me
-      </h4>
+      {/* Heading */}
+      <motion.div
+        className="text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeUp}
+      >
+        <h4 className="mb-3 text-lg font-ovo text-accent tracking-wide">
+          Connect with me
+        </h4>
 
-      <h2 className="text-center text-4xl sm:text-5xl font-ovo font-semibold">
-        Get in Touch
-      </h2>
+        <h2 className="text-4xl sm:text-5xl font-ovo">
+          Get in Touch
+        </h2>
 
-      <p className="text-center max-w-2xl mx-auto mt-5 mb-12 text-gray-600 dark:text-gray-300 font-ovo">
-        I'd love to hear from you! If you have any questions, comments or
-        feedback, feel free to send a message.
-      </p>
+        <p className="max-w-2xl mx-auto mt-5 mb-14 text-gray-600 dark:text-white/70 font-ovo leading-relaxed">
+          I&apos;d love to hear from you! If you have any questions, comments or
+          feedback, feel free to send a message.
+        </p>
+      </motion.div>
 
-      <form onSubmit={onSubmit} className="max-w-2xl mx-auto space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {/* Form */}
+      <motion.form
+        onSubmit={onSubmit}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="max-w-2xl mx-auto space-y-5"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <input
             name="name"
             type="text"
             placeholder="Enter your name"
             required
-            className="p-3 rounded-lg border border-gray-300 dark:border-white/70 bg-white dark:bg-darkHover/30 outline-none focus:ring-2 focus:ring-black/40 transition"
+            className="p-4 rounded-xl border border-gray-200 dark:border-white/15 bg-white/70 dark:bg-darkHover/40 backdrop-blur-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-white/40"
           />
 
           <input
@@ -70,7 +97,7 @@ const Contact = ({ isDark }) => {
             type="email"
             placeholder="Enter your email"
             required
-            className="p-3 rounded-lg border border-gray-300 dark:border-white/70 bg-white dark:bg-darkHover/30 outline-none focus:ring-2 focus:ring-black/40 transition"
+            className="p-4 rounded-xl border border-gray-200 dark:border-white/15 bg-white/70 dark:bg-darkHover/40 backdrop-blur-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-white/40"
           />
         </div>
 
@@ -79,29 +106,44 @@ const Contact = ({ isDark }) => {
           rows="6"
           placeholder="Enter your message"
           required
-          className="w-full p-4 rounded-lg border border-gray-300 dark:border-white/70 bg-white dark:bg-darkHover/30 outline-none focus:ring-2 focus:ring-black/40 transition"
-        ></textarea>
+          className="w-full p-4 rounded-xl border border-gray-200 dark:border-white/15 bg-white/70 dark:bg-darkHover/40 backdrop-blur-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-white/40 resize-none"
+        />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="py-3 px-8 flex items-center gap-2 bg-black/80 text-white rounded-full mx-auto hover:bg-black transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed dark:bg-transparent dark:border dark:border-white dark:hover:bg-darkHover"
-        >
-          {loading ? "Sending..." : "Submit Now"}
-
-          <Image
-            src={isDark ? assets.right_arrow_white : assets.right_arrow}
-            alt="arrow"
-            className="w-4"
-          />
-        </button>
+        <div className="flex justify-center pt-2">
+          <motion.button
+            type="submit"
+            disabled={loading}
+            whileHover={{ scale: loading ? 1 : 1.04 }}
+            whileTap={{ scale: loading ? 1 : 0.96 }}
+            className="py-3.5 px-10 flex items-center gap-2 bg-linear-to-r from-accent to-accentSoft text-white rounded-full shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+          >
+            {loading ? (
+              <>
+                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Sending...
+              </>
+            ) : (
+              <>
+                Submit Now
+                <Image
+                  src={assets.right_arrow_white}
+                  alt="arrow"
+                  className="w-3.5"
+                />
+              </>
+            )}
+          </motion.button>
+        </div>
 
         {result && (
           <p className="text-center mt-4 text-sm font-medium animate-fadeIn">
             {result}
           </p>
         )}
-      </form>
+      </motion.form>
     </section>
   );
 };
